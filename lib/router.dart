@@ -27,7 +27,7 @@ class AppRouter {
           return BeamPage(
             child: Dashboard(
               routerDelegate: BeamerDelegate(
-                transitionDelegate: const NoAnimationTransitionDelegate(),
+                updateFromParent: false,
                 locationBuilder: RoutesLocationBuilder(
                   routes: {
                     fooRoute: (
