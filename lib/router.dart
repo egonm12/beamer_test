@@ -6,15 +6,15 @@ import 'package:beamer_test/widgets/foo.dart';
 import 'package:flutter/cupertino.dart';
 
 class AppRouter {
-  static const dashboardRoute = '*';
+  static const _prefix = '/dashboard';
+  static const dashboardRoute = '$_prefix/*';
   static const dialogRoute = '/dialog';
-  static const fooRoute = '/foo';
-  static const barRoute = '/bar';
+  static const fooRoute = '$_prefix/foo';
+  static const barRoute = '$_prefix/bar';
 
   static final routeInformationParser = BeamerParser();
   static final routerDelegate = BeamerDelegate(
     initialPath: fooRoute,
-    // transitionDelegate: const NoAnimationTransitionDelegate(),
     locationBuilder: RoutesLocationBuilder(
       routes: {
         dashboardRoute: (
@@ -27,6 +27,8 @@ class AppRouter {
           return BeamPage(
             child: Dashboard(
               routerDelegate: BeamerDelegate(
+                initialPath: fooRoute,
+                updateFromParent: false,
                 transitionDelegate: const NoAnimationTransitionDelegate(),
                 locationBuilder: RoutesLocationBuilder(
                   routes: {
@@ -55,6 +57,7 @@ class AppRouter {
           data,
         ) =>
             const BeamPage(
+              fullScreenDialog: true,
               key: const ValueKey('dialog'),
               child: const DialogScreen(),
             ),

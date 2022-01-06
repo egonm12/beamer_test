@@ -1,4 +1,5 @@
 import 'package:beamer/beamer.dart';
+import 'package:beamer_test/router.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
@@ -35,7 +36,8 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _currentIndex = _beamerDelegate.configuration.location == '/foo' ? 0 : 1;
+    _currentIndex =
+        _beamerDelegate.configuration.location == AppRouter.fooRoute ? 0 : 1;
     return BottomNavigationBar(
       currentIndex: _currentIndex,
       items: const [
@@ -43,7 +45,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
         BottomNavigationBarItem(label: 'Bar', icon: Icon(Icons.article)),
       ],
       onTap: (index) => _beamerDelegate.beamToNamed(
-        index == 0 ? '/foo' : '/bar',
+        index == 0 ? AppRouter.fooRoute : AppRouter.barRoute,
       ),
     );
   }
